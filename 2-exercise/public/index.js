@@ -1,44 +1,57 @@
-const todoItem = document.querySelector(".todo-item")
 const todoInput = document.querySelector('#input-todo');
 const todos = []
 
-
-
-const getTodos = async() => {
+async function getTodos() {
     try {
-        const res = await fetch('/api/todos')
-
-        if(res.status !== 200){
-            throw new Error("something went wrong")
+        const response = await fetch('/api/todos');
+    
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await res.json()
-        data.array.forEach(todo => {
-            todo.push(todos)
-        });
+        const data = await response.json()
 
+        todos.length = 0;
+        
+        data.forEach(todo => todos.push(todo))
+        
         todoList()
-
+        
         console.log(data)
-
-    } catch (error) {
-        console.log(error.message)
+    } 
+    catch (error) {
+    console.error('Error:', error);
     }
 }
 
-getTodos()
+getTodos();
 
 const todoList = () => {
-    todoItem.innerHTML = '';
+
+    const todoContainer = document.querySelector("#todo-container")
+    todoContainer.innerHTML = ''
+
     todos.forEach(todo => {
-        todoItem.innerHTML += `
-    <div class="todo-item">
-            <div class="todo-title">
-                ${todo.title}
-            </div>
-            <button class="del-btn">X</button>
-        </div>`;
+
+        const todoElement = document.createElement('div');
+        todoElement.classList.add('todo-item');
+
+        const titleElement = document.createElement('div');
+        titleElement.classList.add('todo-title');
+        titleElement.textContent = todo.title; 
+
+        const buttonElement = document.createElement('button');
+        buttonElement.classList.add('del-btn');
+        buttonElement.textContent = 'X';
+        buttonElement.addEventListener('click', () => deleteTodo(todo.id))
+
+        todoElement.appendChild(titleElement);
+        todoElement.appendChild(buttonElement);
+
+        todoContainer.appendChild(todoElement);
     });
+
+    return todoContainer
 }
 
 const addTodo = async() => {
@@ -52,16 +65,14 @@ const addTodo = async() => {
         })
     })
 
-    const data = await res.json()
-
     if(res.status !== 201){
         console.log("something went wrong", res.status)
         return
     }
+    
+    const data = await res.json()
 
     todos.push(data)
-
-    console.log(data)
 }
 
 const form = document.querySelector('#add-todo-form')
@@ -75,6 +86,30 @@ form.addEventListener('submit', async (e) => {
         todo: todoInput.value
     })
 
-    form.reset()
     todoList()
+
+    form.reset()
 })
+
+const deleteTodo = async (id) => {
+    try {
+        const res = await fetch(`/api/todos/${id}`, {
+            method: 'DELETE',
+        });
+
+
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const data = await res.json()
+
+        console.log(data)
+
+        getTodos()
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+    
+}

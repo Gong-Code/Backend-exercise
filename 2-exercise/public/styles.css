@@ -37,13 +37,6 @@ body {
     padding: 3rem;
 }
 
-#todo-list {
-    display: flex;
-    gap: 2rem;
-    flex-direction: column;
-    margin-top: 3rem;
-    width: 100%;
-}
 
 .btn, .input-todo {
     padding-top: 1rem;
@@ -57,7 +50,6 @@ body {
     padding-left: 1.2rem;
     padding-right: 1.2rem;
     cursor: pointer;
-
 }
 
 #input-todo {
@@ -65,10 +57,18 @@ body {
     padding-right: .7rem;
 }
 
+#todo-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .todo-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: .7rem;
 }
+
 
 .del-btn {
     padding: .3em;
