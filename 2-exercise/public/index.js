@@ -73,6 +73,8 @@ const addTodo = async() => {
     const data = await res.json()
 
     todos.push(data)
+
+    getTodos()
 }
 
 const form = document.querySelector('#add-todo-form')
