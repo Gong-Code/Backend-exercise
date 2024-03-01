@@ -97,7 +97,6 @@ const deleteTodo = async (id) => {
             method: 'DELETE',
         });
 
-
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
