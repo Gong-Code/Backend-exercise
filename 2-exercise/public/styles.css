@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+        sans-serif;
+    color: #eee;
+    background-color: #1a1a1a;
+    width: 100vw;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#wrapper {
+    flex-direction: column;
+    margin-top: 10rem;
+    padding-left: 7rem;
+    padding-right: 7rem;
+    justify-content: center;
+    background-color: rgba(54, 52, 49, 0.499);
+    height: 70vh;
+    box-shadow: 8px 8px #eeeeee32;
+
+}
+
+#add-todo-form {
+    display: flex;
+    gap: 2rem;
+    margin-top: 10rem;
+    background-color: #eeeeee32;
+    border-radius: .3rem;
+    padding: 3rem;
+}
+
+#todo-list {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.btn, .input-todo {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: .9rem;
+    border-radius: .3rem;
+    border: none;
+}
+
+.btn {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    cursor: pointer;
+
+}
+
+#input-todo {
+    padding-left: .7rem;
+    padding-right: .7rem;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.del-btn {
+    padding: .3em;
+    border-radius: 1rem;
+    border: none;
+    background-color: firebrick;
+    color: #fff;
+    cursor: pointer;
+}
