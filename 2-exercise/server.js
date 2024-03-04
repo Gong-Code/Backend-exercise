@@ -24,7 +24,7 @@ mongoose
     console.log('connected to MongoDB')
     app.listen(PORT, () => console.log("server is running on: http://localhost:" + PORT))
 }).catch((error) => {
-    console.log(error)
+    console.error(error)
 })
 
 app.get('/api/todos', async (req, res) => {
