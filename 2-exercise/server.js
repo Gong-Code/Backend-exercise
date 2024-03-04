@@ -13,7 +13,6 @@ const prisma = new PrismaClient()
 
 const PORT = process.env.PORT || 9999
 
-
 require('dotenv').config();
 
 mongoose.set("strictQuery", false)
