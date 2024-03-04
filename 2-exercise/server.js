@@ -54,7 +54,7 @@ app.delete('/api/todos/:id', async(req, res) => {
     try {
         await prisma.todo.delete({
             where: {
-                id: (id),
+                id: id,
             },
         });
 
