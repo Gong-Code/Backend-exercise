@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const { PrismaClient } = require('@prisma/client')
+const mongoose = require("mongoose");
+const uri = process.env.MONGODB_URI;
 
 const app = express()
 app.use(express.json())
@@ -11,13 +13,27 @@ app.use(express.static(path.join(__dirname, 'public')))
 const prisma = new PrismaClient()
 
 const PORT = process.env.PORT || 9999
-app.listen(PORT, () => console.log("server is running on: http://localhost:" + PORT))
+
+
+require('dotenv').config();
+
+mongoose.set("strictQuery", false)
+
+mongoose
+.connect(uri)
+.then(() => {
+    console.log('connected to MongoDB')
+    app.listen(PORT, () => console.log("server is running on: http://localhost:" + PORT))
+}).catch((error) => {
+    console.log(error)
+})
 
 app.get('/api/todos', async (req, res) => {
     try {
         const todos = await prisma.todo.findMany();
         res.json(todos);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Something went wrong' });
     }
 });
@@ -50,3 +66,4 @@ app.delete('/api/todos/:id', async(req, res) => {
         res.status(400).json({ success: false, message: 'Failed to delete todo' })
     }
 })
+

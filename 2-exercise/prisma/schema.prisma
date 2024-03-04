@@ -6,11 +6,11 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
 }
 
 model Todo {
-  id      Int     @id @default(autoincrement())
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   title   String
 }

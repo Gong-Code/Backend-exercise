@@ -1,5 +1,5 @@
 const todoInput = document.querySelector('#input-todo');
-const todos = []
+const todos = [];
 
 async function getTodos() {
     try {
