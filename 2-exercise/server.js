@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const fs = require('fs')
 const { PrismaClient } = require('@prisma/client')
 const mongoose = require("mongoose");
 const uri = process.env.MONGODB_URI;
